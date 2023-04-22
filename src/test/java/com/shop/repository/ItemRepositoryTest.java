@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,5 +40,61 @@ class ItemRepositoryTest {
         item.setUpdateTime(LocalDateTime.now());
         Item savedItem = itemRepository.save(item);
         System.out.println(savedItem.toString());
+    }
+
+    public void createItemList(){                   //테스트 코드 실행 시 DB에 상품 데이터가 없어서 이 메소드를 실행하여 데이터 넣어준다.
+        for(int i = 1 ; i <= 10;i++){
+            Item item = new Item();
+            item.setItemNm("테스트 상품" + i);
+            item.setPrice(10000 + i);
+            item.setItemDetail("테스트 상품 상세 설명" + i);
+            item.setItemSellStatus(ItemSellStatus.SELL);
+            item.setStockNumber(100);
+            item.setRegTime(LocalDateTime.now());
+            item.setUpdateTime(LocalDateTime.now());
+            Item savedItem = itemRepository.save(item);
+        }
+    }
+
+    @Test
+    @DisplayName("상품명 조회 테스트")
+    public void findByItemNmTest(){
+        this.createItemList();
+        List<Item> itemList = itemRepository.findByItemNm("테스트 상품1");   //ItemRepository 인터페이스에서 작성한 메소드 호출
+        for(Item item : itemList){
+            System.out.println(item.toString());                          //조회 결과 얻은 item 객체 출력
+        }
+    }
+
+    @Test
+    @DisplayName("상품명, 상품상세설명 or 테스트")
+    public void findByItemNmOrItemDetail(){
+        this.createItemList();                          //위에 존재하는 메소드 실행
+        List<Item> itemList = itemRepository.findByItemNmOrItemDetail("테스트 상품1","테스트 상품 상세 설명5");
+                                                        //상품명이 "테스트 상품1" 또는 상품 상세 설명이 "테스트 상품 상세 설명5"인 itemList를 반환
+                                                        //or이라 두개의 item 객체가 나올 것이다.
+        for(Item item : itemList){
+            System.out.println(item.toString());
+        }
+    }
+
+    @Test
+    @DisplayName("가격 LessThan 테스트")
+    public void findByPriceLessThan(){
+        this.createItemList();
+        List<Item> itemList =  itemRepository.findByPriceLessThan(10005);       //10005보다 작은 1004까지 출력
+        for (Item item : itemList){
+            System.out.println(item.toString());
+        }
+    }
+
+    @Test
+    @DisplayName("가격 내림차순 조회 테스트")
+    public void findByPriceLessThanOrderBy(){
+        this.createItemList();
+        List<Item> itemList = itemRepository.findByPriceLessThanOrderByPriceDesc(10005);
+        for(Item item : itemList){
+            System.out.println(item.toString());
+        }
     }
 }
