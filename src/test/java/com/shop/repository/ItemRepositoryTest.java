@@ -40,8 +40,8 @@ class ItemRepositoryTest {
                                                                         //이용해서 EntityManager Bean 주입
 
     @Test                                                               //테스트할 메소드 위에 선언하여 해당 메소드를 테스트 대상으로 지정
-                                                                        //만약 여러 테스트가 있으면 @Ignore 사용해서 무시 가능
-    @DisplayName("상품 저장 테스트")                                        //테스트 코드 실행 시 지정한 테스트명이 노출
+                                                                        //Spring은 만약 여러 테스트가 있으면 @Ignore 사용해서 무시 가능
+    @DisplayName("상품 저장 테스트")                                      //테스트 코드 실행 시 지정한 테스트명이 노출
     public void createItemTest(){
         Item item = new Item();
         item.setItemNm("테스트 상품");
