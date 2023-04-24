@@ -54,12 +54,17 @@
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
-<!--			<version>4.3.1</version>-->
+		<!--<version>4.3.1</version>-->
 		</dependency>
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-apt</artifactId>
-<!--			<version>4.3.1</version>-->
+			<!--<version>4.3.1</version>-->
+		</dependency>
+		<!--spring-boot-devtools를 위한 의존성 주입-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 
 	</dependencies>
@@ -88,7 +93,8 @@
 							<goal>process</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>target/generated-sources/java</outputDirectory>                 <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+							<outputDirectory>target/generated-sources/java</outputDirectory>
+							<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
 						</configuration>
 					</execution>
 				</executions>
