@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link th:href="@{/css/layout1.css}" rel="stylesheet">       <!--layout1.css를 이용할 수 있도록 작업-->
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <th:block layout:fragment="script"></th:block>
     <th:block layout:fragment="css"></th:block>
 
@@ -15,7 +24,7 @@
                                                                 즉, fragment 폴더 아래 header.html 파일의 th:fragment=header
                                                                 영역 가져온다-->
 
-    <div th:layout:fragment="content">                      <!--layout에서 변경되는 영역을 fragment로 설정-->
+    <div class="content" th:layout:fragment="content">                      <!--layout에서 변경되는 영역을 fragment로 설정-->
 
     </div>
 
