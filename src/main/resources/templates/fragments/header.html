@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th=http://www.thymeleaf.org>        <!--thymeleaf 문법을 사용하기 위해 추가 -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">         <!--thymeleaf 문법을 사용하기 위해 추가 -->
 
 <div th:fragment="header">           <!--다른 페이지에 포함시킬 영역을 th:fragment로 선언
                                         header 영역을 fragment로 만듦-->
@@ -12,22 +13,22 @@
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                     <a class="nav-link" href="/admin/item/new">상품 등록</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                     <a class="nav-link" href="/admin/items">상품 관리</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/cart">장바구니</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/orders">구매이력</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="isAnonymous()">
                     <a class="nav-link" href="/members/login">로그인</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/members/logout">로그아웃</a>
                 </li>
             </ul>

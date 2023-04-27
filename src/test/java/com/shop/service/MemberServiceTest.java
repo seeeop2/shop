@@ -38,7 +38,6 @@ class MemberServiceTest {
     public void saveMemberTest(){
         Member member = createMember();
         Member savedMember = memberService.saveMember(member);
-
         assertEquals(member.getEmail(), savedMember.getEmail());
         assertEquals(member.getName(), savedMember.getName());
         assertEquals(member.getAddress(), savedMember.getAddress());
