@@ -38,8 +38,8 @@ public class ThymeleafExController {
         for(int i = 1 ; i <=10 ; i++ ) {
             ItemDto itemDto = new ItemDto();
             itemDto.setItemDetail("상품 상세 설명" + i);
-            itemDto.setItemNm("테스트 상품1" + i);
-            itemDto.setPrice(10000 * i);
+            itemDto.setItemNm("테스트 상품" + i);
+            itemDto.setPrice(1000* i);
             itemDto.setRegTime(LocalDateTime.now());
 
             itemDtoList.add(itemDto);
@@ -55,8 +55,8 @@ public class ThymeleafExController {
         for(int i = 1; i <= 10; i++ ){
             ItemDto itemDto = new ItemDto();
             itemDto.setItemDetail("상품 상세 설명" + i);
-            itemDto.setItemNm("테스트 상품1" + i);
-            itemDto.setPrice(10000 * i);
+            itemDto.setItemNm("테스트 상품" + i);
+            itemDto.setPrice(1000* i);
             itemDto.setRegTime(LocalDateTime.now());
 
             itemDtoList.add(itemDto);
@@ -66,7 +66,7 @@ public class ThymeleafExController {
     }
 
     @GetMapping(value = "/ex05")
-    public String thymeleafExample05(Model model){
+    public String thymeleafExample05(){
         return "thymeleafEx/thymeleafEx05";                //templages 폴더를 기준으로 뷰의 위치,이름 반환
     }
 

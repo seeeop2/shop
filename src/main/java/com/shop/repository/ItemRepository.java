@@ -21,8 +21,7 @@ public interface ItemRepository extends JpaRepository<Item,Long>, QuerydslPredic
     @Query("select i from Item i where i.itemDetail like %:itemDetail% order by i.price desc")  //SQL과 유사한 JPQL
     List<Item> findByItemDetail(@Param("itemDetail") String itemDetail);       //다른 방법이 있지만, @Param을 추천
 
-    @Query(value = "select * from Item i where i.item_detail like %:itemDetail% order by i.price desc",nativeQuery = true)
-                                                                //value 안에 네이티브 쿼리문 작성하고 nativeQeury = true 작성해준다.
+    @Query(value = "select * from item i where i.item_detail like %:itemDetail% order by i.price desc",nativeQuery = true)                                                                //value 안에 네이티브 쿼리문 작성하고 nativeQeury = true 작성해준다.
                                                                 //데이터베이스에 사용하던 쿼리를 그대로 사용해야 할 때는 nativeQeury속성을 사용하면
                                                                 //기존 쿼리 그대로 활용 가능
                                                                 //But 특정 DB에 종속되는 쿼리문을 사용하기 때문에 DB에 대한 독립적이라는 장점 잃는다.
