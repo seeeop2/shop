@@ -79,4 +79,9 @@ public class ThymeleafExController {
         return "thymeleafEx/thymeleafEx06";                //templages 폴더를 기준으로 뷰의 위치,이름 반환
     }
 
+    @GetMapping(value = "/ex07")
+    public String thymeleafExample07(){
+        return "thymeleafEx/thymeleafEx07";                //templages 폴더를 기준으로 뷰의 위치,이름 반환
+    }
+
 }
