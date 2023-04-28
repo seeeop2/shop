@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">         <!--thymeleaf 문법을 사용하기 위해 추가 -->
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">     <!--Spring Security 태그를 사용하기 위해서 추가-->
 
 <div th:fragment="header">           <!--다른 페이지에 포함시킬 영역을 th:fragment로 선언
                                         header 영역을 fragment로 만듦-->
@@ -13,22 +13,22 @@
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><!--관리자계정으로 로그인한 경우 상품등록 ON-->
                     <a class="nav-link" href="/admin/item/new">상품 등록</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><!--관리자계정으로 로그인한 경우 상품관리 ON-->
                     <a class="nav-link" href="/admin/items">상품 관리</a>
                 </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
+                <li class="nav-item" sec:authorize="isAuthenticated()"><!--로그인했을 경우 장바구니 ON-->
                     <a class="nav-link" href="/cart">장바구니</a>
                 </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
+                <li class="nav-item" sec:authorize="isAuthenticated()"><!--로그인했을 경우 구매이력 ON-->
                     <a class="nav-link" href="/orders">구매이력</a>
                 </li>
-                <li class="nav-item" sec:authorize="isAnonymous()">
+                <li class="nav-item" sec:authorize="isAnonymous()"><!--로그인하지 않은 상태이면 로그인 메뉴 ON-->
                     <a class="nav-link" href="/members/login">로그인</a>
                 </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
+                <li class="nav-item" sec:authorize="isAuthenticated()"><!--로그인 상태이면 로그아웃 메뉴 ON-->
                     <a class="nav-link" href="/members/logout">로그아웃</a>
                 </li>
             </ul>

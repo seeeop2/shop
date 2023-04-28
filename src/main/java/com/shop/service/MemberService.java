@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
                                 @RequiredArgsConstructor은 final이나 @NonNUll이 붙은 필드에 생성자를 생성한다.
                                 Bean은 생성자가 1개이고, 생성자가 파라미터 타입이 Bean으로 등록이 가능하다면
                                 @Autowired 없이 의존성 주입이 가능하다. */
-public class MemberService implements UserDetailsService {
+public class MemberService implements UserDetailsService {   //UserDetailsService를 구현
 
     private final MemberRepository memberRepository;    //@RequiredArgsConstructor을 이용한 생성자 주입
 
@@ -34,7 +34,7 @@ public class MemberService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException { //login할 유저의 email 필요
 
         Member member = memberRepository.findByEmail(email);
 
@@ -42,7 +42,7 @@ public class MemberService implements UserDetailsService {
             throw new UsernameNotFoundException(email);
         }
 
-        return User.builder()
+        return User.builder()   //User객체를 반환. User객체를 생성하기 위해 회원의 email,pw,role을 파라미터로 넘겨 준다.
                 .username(member.getEmail())
                 .password(member.getPassword())
                 .roles(member.getRole().toString())

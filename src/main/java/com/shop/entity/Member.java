@@ -48,7 +48,9 @@ public class Member {
                                                                                     넘겨 비밀번호를 암호화*/
         member.setPassword(password);
 
-        member.setRole(Role.USER);
+//        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN); //Member 엔티티 생성 시 USER role로 생성하던 권한을 ADMIN role로 생성하도록 수정
+
         return member;
     }
 

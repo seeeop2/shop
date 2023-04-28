@@ -26,24 +26,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {  /*http 요청에 대한 보안 설정. 페이지 권한 설정, 로그인 페이지
                                                                         설정, 로그아웃 메소드 등에 대한 설정 작성*/
         http.formLogin()
-                .loginPage("/members/login")
-                .defaultSuccessUrl("/")
-                .usernameParameter("email")
-                .failureUrl("/members/login/error")
+                .loginPage("/members/login")    //로그인할 페이지 URL 설정
+                .defaultSuccessUrl("/")     //로그인 성공 시 이동할 URL 설정
+                .usernameParameter("email") //로그인시 사용할 파리미터 이름으로 email 지정
+                .failureUrl("/members/login/error") //로그인 실패시 이동할 URL 설정
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
-                .logoutSuccessUrl("/")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout")) //로그아웃 URL 설정
+                .logoutSuccessUrl("/")  //로그아웃 성공 시 이동할 URL 설정
         ;
 
-        http.authorizeRequests()
+        http.authorizeRequests()    //시큐리티 처리에 httpServeltRequest를 이용한다는 의미
                 .mvcMatchers("/", "/members/**", "/item/**", "/images/**").permitAll()
-                .mvcMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                /*permitAll()을 통해 모든 사용자가 인증(로그인) 없이 해당 경로에 접근할 수 있도록 설정. 메인 페이지, 회원 관련 URL, 뒤에서 만들
+                    상품 상세 페이지, 상품 이미지를 불러오는 경로가 이에 해당*/
+                .mvcMatchers("/admin/**").hasRole("ADMIN")/* 1차 주소 /admin 경로는 ADMIN role일 경우에만 접근 가능*/
+                .anyRequest().authenticated()/*permitAll(), hasRole("ADMIN") 제외한 나머지 경로들은 모두 인증을 요구하도록 설정*/
         ;
 
         http.exceptionHandling()
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())/*인증되지 않은 사용자가 리소스에 접근하였을 때
+                                                                                    수행되는 핸들러 등록*/
         ;
     }
 
@@ -56,12 +59,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(memberService)
-                .passwordEncoder(passwordEncoder());
+        /*Spring Security에서 인증은 AuthenticationManager를 통해 이루어지며,
+            AuthenticationManagerBuilder 객체가 AuthenticationManager를 생성*/
+        auth.userDetailsService(memberService)      //userDetailsService를 구현하고 있는 객체로 memberService를 지정
+                .passwordEncoder(passwordEncoder());    //비밀번호 암호화를 위해 passwordEncoder를 지정
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) throws Exception {       /*static 디렉터리의 하위 파일은 인증을 무시하도록 설정*/
         web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");
     }
 
